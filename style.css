@@ -63,10 +63,6 @@ nav li a:hover:before{
     width: 100%;
 }
 
-.dropdown{
-    /* overflow: hidden; */
-}
-
 .dropdown-content{
     display: none;
     padding-top: -10px;
