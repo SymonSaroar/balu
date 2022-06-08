@@ -106,3 +106,24 @@ nav li a:hover:before{
     cursor: pointer;
     padding: 6px;
 }
+
+/* Slide show */
+.slideshow {
+    width: 60%;
+    background-color: #abc;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.slides {
+    display: none;
+    width: 100%;
+    margin: 0 auto;
+    position: inherit;
+    background-color: #bbc;
+}
+.slide-image {
+    width: 100%;
+    max-height: 500px;
+}
