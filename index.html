@@ -4,15 +4,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet' as="font" type="font/woff2" crossorigin>
-    
+    <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet' as="font" type="font/woff2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/54aa03985b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script>
+        cur = -1;
+        let numOfSlides = 3;
+        let slideDelay = 2000;
+        let sliderTimeout;
+        let slides;
+        let indicator;
+        let indicators;
+        showNextSlide();
+        function showNextSlide(){
+            slides = document.getElementsByClassName('slides');
+            indicator = document.getElementById('indicator');
+            if(slides.length == 0 || indicator == null){
+                console.log("returned"); 
+                sliderTimeout = setTimeout(showNextSlide, slideDelay);
+                return;
+            }
+            cur++;
+            cur %= numOfSlides;
+            let prev = ((cur - 1) + numOfSlides) % numOfSlides;
+            let now = cur;
+            indicators = indicator.getElementsByTagName('a');
+            if(indicators.length == 0){
+                console.log("returned");
+                sliderTimeout = setTimeout(showNextSlide, slideDelay);
+                return;
+            }
+            indicators[prev].className = indicators[prev].className.replace(" active", "");
+            indicators[now].className += " active";
+            slides[prev].style.display = "none";
+            slides[now].style.display = "block";
+            console.log("step", cur);
+            sliderTimeout = setTimeout(showNextSlide, slideDelay);
+        }
+        let set = [];
+        for(let i = 0; i < numOfSlides; i++){
+            set.push(
+                function() {
+                    cur = i-1;
+                    clearTimeout(sliderTimeout);
+                    for(let j = 0; j < numOfSlides; j++){
+                        slides[j].style.display = "none";
+                        indicators[j].className = indicators[j].className.replace(" active", "");
+                    }
+                    showNextSlide();
+                }
+            )
+        }
+        function slideNext(){
+        
+            cur %= numOfSlides;
+            clearTimeout(sliderTimeout);
+            for(let j = 0; j < numOfSlides; j++){
+                slides[j].style.display = "none";
+                indicators[j].className = indicators[j].className.replace(" active", "");
+            }
+            showNextSlide();
+        }
+        function slidePrev(){
+            cur -= 2;
+            cur += numOfSlides;
+            cur %= numOfSlides;
+            console.log("previous", cur);
+            clearTimeout(sliderTimeout);
+            for(let j = 0; j < numOfSlides; j++){
+                slides[j].style.display = "none";
+                indicators[j].className = indicators[j].className.replace(" active", "");
+            }
+            showNextSlide();
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
-            <img class="logo" src="images/logo/logo.jpg" alt="AltText">   
+            <img class="logo" src="images/logo/logo.jpg" alt="Metro Scientific">   
             <!-- Change Alt Text -->
 
             <nav>
@@ -59,15 +129,47 @@
         <div class="slides">
             <img class="slide-image" src="images/slide3.png" alt="Slide 3">
         </div>
-        <div class="slide-indicator">
+        <div class="slide-indicator" id="indicator">
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li onclick="set[0]()"><a href="#"></a></li>
+                <li onclick="set[1]()"><a href="#"></a></li>
+                <li onclick="set[2]()"><a href="#"></a></li>
             </ul>
         </div>
-        <a class="slide-next">&#10094;</a>
-        <a class="slide-prev">&#10095;</a>
+        <a class="slide-cycle slide-next" onclick="slideNext()">&#10095;</a>
+        <a class="slide-cycle slide-prev" onclick="slidePrev()">&#10094;</a>
     </div>
+
+    <div class="title-separator">
+        <ul>
+            <li class=" active">
+                <span class="fa-solid fa-font-awesome titlefa"></span><br>
+                <span class="text">Services</span>
+            </li>
+            <li>
+                <span class="fa-solid fa-font-awesome titlefa"></span><br>
+                <span class="text">Clients</span>
+            </li>
+        </ul>
+        
+    </div>
+
+    <div class="info">
+        <ul>
+            <li>
+                <div class="infocard"></div>
+            </li>
+            <li>
+                <div class="infocard"></div>
+            </li>
+            <li>
+                <div class="infocard"></div>
+            </li>
+            <li>
+                <div class="infocard"></div>
+            </li>
+        </ul>
+    </div>
+    
 </body>
 </html>
