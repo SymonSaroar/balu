@@ -6,11 +6,22 @@
     <title>Title</title>
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet' as="font" type="font/woff2" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/54aa03985b.js" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap.css">
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js" crossorigin="anonymous"></script>
+    <!-- Slick Slider JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script>
         cur = -1;
         let numOfSlides = 3;
-        let slideDelay = 2000;
+        let slideDelay = 3000;
         let sliderTimeout;
         let slides;
         let indicator;
@@ -28,7 +39,7 @@
             cur %= numOfSlides;
             let prev = ((cur - 1) + numOfSlides) % numOfSlides;
             let now = cur;
-            indicators = indicator.getElementsByTagName('a');
+            indicators = indicator.getElementsByTagName('li');
             if(indicators.length == 0){
                 console.log("returned");
                 sliderTimeout = setTimeout(showNextSlide, slideDelay);
@@ -77,11 +88,34 @@
             }
             showNextSlide();
         }
+
+        $(document).ready(function () {
+            $('.logo-carousel').slick({
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1000,
+                arrows: true,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 4
+                    }
+                }, {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                }]
+            });
+        });
     </script>
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="header-container">
             <img class="logo" src="images/logo/logo.jpg" alt="Metro Scientific">   
             <!-- Change Alt Text -->
 
@@ -119,25 +153,27 @@
     <div>
 
     </div>
-    <div class="slideshow">
-        <div class="slides">
-            <img class="slide-image" src="images/slide1.png" alt="Slide 1">
+    <div class="slideshow-container">
+        <div class="slideshow">
+            <div class="slides">
+                <img class="slide-image" src="images/slide1.jpg" alt="Slide 1">
+            </div>
+            <div class="slides">
+                <img class="slide-image" src="images/slide2.jpg" alt="Slide 2">
+            </div>
+            <div class="slides">
+                <img class="slide-image" src="images/slide3.jpg" alt="Slide 3">
+            </div>
+            <div class="slide-indicator" id="indicator">
+                <ul>
+                    <li onclick="set[0]()"><a href="#"></a></li>
+                    <li onclick="set[1]()"><a href="#"></a></li>
+                    <li onclick="set[2]()"><a href="#"></a></li>
+                </ul>
+            </div>
+            <a class="slide-cycle slide-next" onclick="slideNext()">&#10095;</a>
+            <a class="slide-cycle slide-prev" onclick="slidePrev()">&#10094;</a>
         </div>
-        <div class="slides">
-            <img class="slide-image" src="images/slide2.png" alt="Slide 2">
-        </div>
-        <div class="slides">
-            <img class="slide-image" src="images/slide3.png" alt="Slide 3">
-        </div>
-        <div class="slide-indicator" id="indicator">
-            <ul>
-                <li onclick="set[0]()"><a href="#"></a></li>
-                <li onclick="set[1]()"><a href="#"></a></li>
-                <li onclick="set[2]()"><a href="#"></a></li>
-            </ul>
-        </div>
-        <a class="slide-cycle slide-next" onclick="slideNext()">&#10095;</a>
-        <a class="slide-cycle slide-prev" onclick="slidePrev()">&#10094;</a>
     </div>
 
     <div class="title-separator">
@@ -147,29 +183,147 @@
                 <span class="text">Services</span>
             </li>
             <li>
-                <span class="fa-solid fa-font-awesome titlefa"></span><br>
-                <span class="text">Clients</span>
+                <span class="fa-solid fa-box-open titlefa"></span><br>
+                <span class="text">Products</span>
+            </li>
+            <li>
+                <span class="fa-solid fa-users titlefa"></span><br>
+                <span class="text">Community</span>
             </li>
         </ul>
         
     </div>
-
     <div class="info">
+
         <ul>
             <li>
-                <div class="infocard"></div>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/embedded-system.jpeg" alt="Embedded Systems">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
             </li>
             <li>
-                <div class="infocard"></div>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/modeling-simulation.jpg" alt="Modeling & Simulations">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
             </li>
             <li>
-                <div class="infocard"></div>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/circuit-design.jpg" alt="Circuit Design">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
             </li>
             <li>
-                <div class="infocard"></div>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/rtl-design.jpg" alt="RTL Design">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
+            </li>
+            <li>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/layout-design.jpg" alt="Layout Design">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
+            </li>
+            <li>
+                <div class="infocard">
+                    <div class="img-container">
+                        <img src="images/firmware-development.jpeg" alt="Firmware Development">
+                    </div>
+                    <section class="info-content">
+                        <h2 class="title"><a href="#">Embedded Solutions</a></h2>
+                        <p class="description">MetroScientific develop RTL layout design on Xilinix FPGA board. We help global businesses embedded software solutions for high-tech applications and IoT.</p>
+                    </section>
+                </div>
             </li>
         </ul>
+        <div class="clients">
+            <div class="row">
+                <div class="container">
+                    <section class="logo-carousel slider" data-arrows="true">
+                        <div class="slide"><img src="images/carousel/sandia.png" alt="Sandia National Laboratories"></div>
+                        <div class="slide"><img src="images/carousel/intel.png" alt="Intel"></div>
+                        <div class="slide"><img src="images/carousel/applied.png" alt="Applied Materials"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
     
+    <footer>
+        <div class="logo-container">
+            <img class="logo" src="images/logo/logo.jpg" alt="MetroScientific">
+        </div>
+        <div class="contacts-container">
+            <div class="main-office">
+                <p>Main Office</p>
+                
+                <div class="contact">
+                    <p>Contact</p>
+                    Mo Alam <br>
+                    CEO, MetroScientific <br>
+                    alam@metroscientific.com <br>
+                    +1(408)582-4997 <br>
+                </div>
+                <div class="address">
+                    <p>Adress</p>
+                    5001, Great America Parkway, <br>
+                    Santa Clara, <br> 
+                    CA 95054, <br>
+                    United States <br>
+                </div>
+                
+                 
+            </div>
+            <div class="branch-office">
+                <p>Branch Office</p>
+                <div class="dhaka">
+                    <p>Dhaka, Bangladesh</p>
+                    Amal Roy <br>
+                    General Manager, MetroScientific <br>
+                    <email>amal@metroscientific.com</email> <br>
+                    +8801712-277079 <br>
+                    <address>House-57/11, East Raza Bazar, West Pantha Path <br>
+                        Dhaka, Bangladesh</address>
+                </div>
+                <div class="rajshahi">
+                    <p>Rajshahi Bangladesh</p>
+                    Maruf Chowdhury <br>
+                    Director, Rajshahi Branch, MetroScientific <br>
+                    maruf@metroscientific.com <br>
+                    +8801715-013979 <br>
+                    House-511, Road-3, Padma Abashik, <br>
+                    Rajshahi, Bangladesh <br>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,39 @@
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+}
+
 body{
     margin: 0;
-    font-family: overpass;
     font-weight: 400;
     position: relative;
 }
@@ -13,12 +46,13 @@ header::after{
     display: table;
     clear: both;
 }
-.container{
+.header-container{
     width: 80%;
     margin: 0 auto;
+    padding: 0;
 }
 .logo{
-    float: left;
+    left: 0;
     width: 300px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -55,7 +89,8 @@ nav li a:before{
     height: 5px;
     display: block;
     position: absolute;
-    background-color: #444;
+    background-color: #960105;
+    border-radius: 5px;
     top: 0;
     transition: all ease-in-out 200ms;
 }
@@ -109,13 +144,19 @@ nav li a:hover:before{
 }
 
 /* Slide show */
+.slideshow-container {
+    background-color: #04304A;
+    /* overflow: hidden; */
+}
 .slideshow {
     width: 50%;
-    height: 500px;
-    background-color: #abc;
+    height: 390px;
+    /* background-color: #abc; */
     position: relative;
     margin: 0 auto;
     margin-top: 20px;
+    overflow: hidden;
+    color: #FFF;
     /* border: 1px solid black; */
 }
 
@@ -123,10 +164,16 @@ nav li a:hover:before{
     display: none;
     width: 100%;
     margin: 0 auto;
+    overflow: hidden;
 }
 .slide-image {
     width: 100%;
-    max-height: 500px;
+    max-height: 350px;
+    object-fit: contain;
+    transition: transform 1s ease;
+}
+.slide-image:hover {
+    transform: scale(1.1);
 }
 .slide-cycle {
     position: absolute;
@@ -141,7 +188,7 @@ nav li a:hover:before{
     padding: 16px;
 }
 .slide-cycle:hover{
-    background-color: #abc;
+    background-color: #11659688;
 }
 .slide-next {
     right: 0;
@@ -164,8 +211,7 @@ nav li a:hover:before{
 .slide-indicator li {
     cursor: pointer;
     display: inline-block;
-    background-color: rgba(0,0,0,0);
-    border: 1px solid gray;
+    border: 1px solid #FFFFFF66;
     border-radius: 5px;
     height: 5px;
     position: relative;
@@ -173,9 +219,10 @@ nav li a:hover:before{
     bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    transition: border-color 0.5s ease-out;
 }
 .slide-indicator li a {
-    background-color: gray;
+    background-color: #FFF;
     border-radius: 5px;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
     width: 0%;
@@ -183,10 +230,16 @@ nav li a:hover:before{
     display: block;
     top: 0;
     height: 5px;
-    transition: all ease-in-out 150ms;
 }
-.slide-indicator li .active {
-    width: 100%;
+@keyframes indicator-progress {
+    0% {width: 0%;}
+    100% {width: 100%;}
+}
+.slide-indicator .active a {
+    animation: indicator-progress 3s linear;
+}
+.slide-indicator .active {
+    border-color: #FFF;
 }
 
 /* our services */
@@ -195,12 +248,12 @@ nav li a:hover:before{
     padding-bottom: 0;
     text-align: center;
     margin: auto;
-    font-size: 20px;
+    font-size: 0.95rem;
     font-family: "Merriweather";
 }
 
 .titlefa {
-    color: rgb(3, 163, 178);
+    color: rgb(150,1,5);
 }
 
 .title-separator ul {
@@ -211,25 +264,32 @@ nav li a:hover:before{
     display: inline-block;
     width: 100px;
     padding: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+    /* padding-bottom: 40px; */
     margin: 0;
 }
 
 .title-separator ul li.active {
-    /* border-left: 2px solid grey;
-    border-right: 2px  solid grey; */
-    box-shadow: 0px -2px 2px 0px rgba(0,0,0,0.3);
+    border-left: 1px solid grey;
+    border-right: 1px  solid grey;
+    /* box-shadow: 0px -2px 5px -2px rgb(150,1,5); */
+    border-radius: 5px 5px 0px 0px;
+    border-top: 1px solid rgb(150, 1, 5);
+    background-color: #96941110;
 }
 .info {
-    position: relative;
+    /* position: relative; */
     width: 90%;
     top: 0;
     margin: 0 auto;
+    /* margin-top: -16px; */
     text-align: center;
     list-style: none;
-    /* left: 50%; */
+    background-color: #96941110;
+    transition: all 0.3s ease-in-out;
+    font-size: 0.9rem;
 }
 
 .info .container ul {
@@ -246,5 +306,214 @@ nav li a:hover:before{
 .infocard {
     height: 400px;
     width: 400px;
-    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 0px 0px 2px 2px;
+    /* border: 2px solid black; */
+    /* background-color: #969411; */
+}
+
+.infocard:hover {
+    box-shadow: 0px 2px 10px 0px #4A080A;
+}
+.infocard:hover .info-content h2 a {
+    color: #960105;
+    font-size: 1.5rem;
+}
+
+.infocard .img-container {
+    height: 233p    x;
+    width: 400px;
+    overflow: hidden;
+}
+.infocard .img-container img {
+    width: 400px;
+    /* height: 267px; */
+    transition: transform 1s ease;
+}
+
+.infocard .img-container img:hover {
+    transform: scale(1.1);
+}
+
+.infocard section {
+    text-align: left;
+    padding: 10px;
+}
+
+.info-content h2 a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #116596;
+    transition: all 1s ease;
+}
+
+
+
+/* Slider */
+.slide{
+    height: 60px;
+    width: 100px;
+}
+.container{
+    width: 30%;
+}
+.slick-slide {
+    margin: 0px 20px;
+    vertical-align: middle;
+}
+
+.logo-carousel {
+    overflow: inherit;
+    border-top: 1px solid #353535;
+    border-bottom: 1px solid #353535;
+    vertical-align: middle;
+}
+
+.slick-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.slick-track::before,
+.slick-track::after {
+    display: table;
+    content: '';
+}
+
+.slick-track::after {
+    clear: both;
+}
+
+.slick-track {
+    padding: 1rem 0;
+}
+
+.slick-loading .slick-track {
+    visibility: hidden;
+}
+
+.slick-slide.slick-loading img {
+    display: none;
+}
+
+.slick-slide.dragging img {
+    pointer-events: none;
+}
+
+.slick-loading .slick-slide {
+    visibility: hidden;
+}
+
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    background: url(https://raw.githubusercontent.com/solodev/infinite-logo-carousel/master/images/arrow.svg?sanitize=true) center no-repeat;
+    color: #fff;
+    filter: invert(77%) sepia(32%) saturate(1%) hue-rotate(344deg) brightness(105%) contrast(103%);
+    border: none;
+    width: 2rem;
+    height: 1.5rem;
+    text-indent: -10000px;
+    margin-top: -16px;
+    z-index: 99;
+}
+
+.slick-arrow.slick-next {
+    right: -40px;
+    transform: rotate(180deg);
+}
+
+.slick-arrow.slick-prev {
+    left: -40px;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    .slick-arrow {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+.row {
+    overflow: hidden;
+}
+
+
+/* Footer */
+footer {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    text-align: center;
+}
+footer div {
+    display: inline-block;
+}
+.logo-container {
+    width: 25%;
+    margin: 0;
+    padding: 30px;
+    position: relative;
+    /* box-shadow: 0px 0px 2px 2px #000; */
+    /* border: 1px solid black; */
+}
+.contacts-container {
+    width: 70%;
+    /* border: 1px solid blue; */
+    text-align: center;
+    background-color: #fff;
+    color: #04304A;
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 0;
+    font-size: 0.8rem;
+    box-shadow: 0px 0px 2px 1px #4A080A;
+}
+.main-office {
+    left: 0;
+    text-align: left;
+    border-right: 1px solid #4A080A;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 5px;
+    padding-left: 20px;
+    vertical-align: middle;
+    width: 400px;
+    height: 200px;
+}
+.main-office p {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.contact p, .address p {
+    font-size: 0.9rem;
+    color: #000;
+}
+.contact, .address {
+    width: 190px;
+}
+.branch-office{
+    text-align: left;
+    right: 0;
+    margin: 0 auto;
+    border-left: 1px solid #4A080A;
+    vertical-align: middle;
+    margin-top: 5px;
+    padding-left: 30px;
+    height: 200px;
+}
+.branch-office p {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.dhaka p, .rajshahi p {
+    font-size: 0.9rem;
+    color: #000;
+}
+.dhaka {
+    margin-right: 40px;
 }
