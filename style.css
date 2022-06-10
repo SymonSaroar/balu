@@ -38,9 +38,17 @@ body{
     position: relative;
 }
 header {
+    width: 100%;
+    position: sticky;
+    top: 0;
     background-color: #fff;
     box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
+    z-index: 100;
 }
+/* .okay {
+    margin-top: 120px;
+} */
+
 header::after{
     content: ' ';
     display: table;
@@ -80,6 +88,7 @@ nav li a {
     color: #444;
 }
 nav li a:hover {
+    text-decoration: none;
     color: #000;
 }
 
@@ -245,12 +254,12 @@ nav li a:hover:before{
 
 /* our services */
 .title-separator {
-    padding: 48px;
+    padding: 30px;
     padding-bottom: 0;
     text-align: center;
     margin: auto;
-    font-size: 0.95rem;
-    font-family: "Merriweather";
+    font-size: 0.9rem;
+    /* font-family: "Merriweather"; */
 }
 
 .titlefa {
@@ -265,8 +274,8 @@ nav li a:hover:before{
     display: inline-block;
     width: 100px;
     padding: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
     cursor: pointer;
     /* padding-bottom: 40px; */
     margin: 0;
@@ -293,10 +302,11 @@ nav li a:hover:before{
     font-size: 0.9rem;
 }
 
-.info .container ul {
+.info ul {
     position: relative;
     margin: 0;
-    padding: 0;
+    padding-left: 40px;
+    padding-right: 40px;
     /* left: -50%; */
 }
 
@@ -419,6 +429,9 @@ nav li a:hover:before{
     margin-top: -16px;
     z-index: 99;
 }
+.slick-arrow:hover {
+    background-color: #007bff22;
+}
 
 .slick-arrow.slick-next {
     right: -40px;
@@ -458,8 +471,23 @@ footer div {
     margin: 0;
     padding: 30px;
     position: relative;
+    vertical-align: middle;
     /* box-shadow: 0px 0px 2px 2px #000; */
     /* border: 1px solid black; */
+}
+.logo-container div {
+    display: block;
+}
+.social-media {
+    font-size: 2rem;
+}
+.social-media a {
+    color: inherit;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.social-media a:hover {
+    color: rgb(150,1,5);
 }
 .contacts-container {
     width: 70%;
@@ -473,6 +501,9 @@ footer div {
     margin: 0;
     font-size: 0.8rem;
     box-shadow: 0px 0px 2px 1px #4A080A;
+}
+.contacts-container a {
+    color: inherit;
 }
 .main-office {
     left: 0;
