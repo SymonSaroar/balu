@@ -83,6 +83,12 @@
             }
             showNextSlide();
         }
+        
+        $('.title-separator').ready(
+            function() {
+                $('.title-separator').css({'bottom' : '0px'})
+            }
+        )
 
         $(document).ready(function () {
             $('.logo-carousel').slick({
