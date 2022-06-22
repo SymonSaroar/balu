@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="style.css">
     <script>
         cur = -1;
-        let numOfSlides = 3;
-        let slideDelay = 3000;
+        let numOfSlides = 6;
+        let slideDelay = 5000;
         let sliderTimeout;
         let slides;
         let indicator;
@@ -25,25 +25,35 @@
         function showNextSlide(){
             slides = document.getElementsByClassName('slides');
             indicator = document.getElementById('indicator');
+            caption = document.getElementById('slide-caption');
             if(slides.length == 0 || indicator == null){
                 console.log("returned"); 
-                sliderTimeout = setTimeout(showNextSlide, slideDelay);
+                sliderTimeout = setTimeout(showNextSlide, 100);
                 return;
             }
             cur++;
             cur %= numOfSlides;
             let prev = ((cur - 1) + numOfSlides) % numOfSlides;
+            let pprev = ((cur - 2) + numOfSlides) % numOfSlides;
             let now = cur;
             indicators = indicator.getElementsByTagName('li');
-            if(indicators.length == 0){
+            captions = caption.getElementsByTagName('p');
+            if(indicators.length == 0 || captions.length == 0){
                 console.log("returned");
-                sliderTimeout = setTimeout(showNextSlide, slideDelay);
+                sliderTimeout = setTimeout(showNextSlide, 100);
                 return;
             }
             indicators[prev].className = indicators[prev].className.replace(" active", "");
             indicators[now].className += " active";
-            slides[prev].style.display = "none";
-            slides[now].style.display = "block";
+            captions[prev].className = captions[prev].className.replace(" active", "");
+            captions[now].className += " active";
+            // slides[prev].style.display = "none";
+            // slides[now].style.display = "block";
+            slides[now].style.height = "100%";
+            slides[now].style.opacity = "1";
+            slides[prev].style.height = "0";
+            slides[prev].style.opacity = "0.4";
+            // slides[now].style.animation = "slide-fade 1s ease-in";            
             console.log("step", cur);
             sliderTimeout = setTimeout(showNextSlide, slideDelay);
         }
@@ -54,7 +64,9 @@
                     cur = i-1;
                     clearTimeout(sliderTimeout);
                     for(let j = 0; j < numOfSlides; j++){
-                        slides[j].style.display = "none";
+                        slides[j].style.height = "0";
+                        slides[j].style.opacity = "0.4";
+                        captions[j].className = captions[j].className.replace(" active", "");
                         indicators[j].className = indicators[j].className.replace(" active", "");
                     }
                     showNextSlide();
@@ -66,7 +78,9 @@
             cur %= numOfSlides;
             clearTimeout(sliderTimeout);
             for(let j = 0; j < numOfSlides; j++){
-                slides[j].style.display = "none";
+                slides[j].style.height = "0";
+                slides[j].style.opacity = "0.4";
+                captions[j].className = captions[j].className.replace(" active", "");
                 indicators[j].className = indicators[j].className.replace(" active", "");
             }
             showNextSlide();
@@ -78,7 +92,9 @@
             console.log("previous", cur);
             clearTimeout(sliderTimeout);
             for(let j = 0; j < numOfSlides; j++){
-                slides[j].style.display = "none";
+                slides[j].style.height = "0";
+                slides[j].style.opacity = "0.4";
+                captions[j].className = captions[j].className.replace(" active", "");
                 indicators[j].className = indicators[j].className.replace(" active", "");
             }
             showNextSlide();
@@ -117,10 +133,7 @@
 <body>
     <header>
         <div class="header-container">
-            <img class="logo" src="images/logo/logo.jpg" alt="Metro Scientific">   
-            <!-- Change Alt Text -->
-
-            <nav>
+            <img class="logo" src="images/logo/logo.jpg" alt="Balu Technology"><nav>
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li class="dropdown">
@@ -156,20 +169,40 @@
         <div class="slideshow-container">
             <div class="slideshow">
                 <div class="slides">
-                    <img class="slide-image" src="images/slide1.jpg" alt="Slide 1">
+                    <img class="slide-image" src="images/embedded-system.jpeg" alt="Embedded Systems">
                 </div>
                 <div class="slides">
-                    <img class="slide-image" src="images/slide2.jpg" alt="Slide 2">
+                    <img class="slide-image" src="images/modeling-simulation.jpg" alt="Modeling and Simulations">
                 </div>
                 <div class="slides">
-                    <img class="slide-image" src="images/slide3.jpg" alt="Slide 3">
+                    <img class="slide-image" src="images/circuit-design.jpg" alt="Circuit Design">
+                </div>
+                <div class="slides">
+                    <img class="slide-image" src="images/rtl-design.jpg" alt="RTL Design">
+                </div>
+                <div class="slides">
+                    <img class="slide-image" src="images/layout-design.jpg" alt="Layout Design">
+                </div>
+                <div class="slides">
+                    <img class="slide-image" src="images/firmware-development.jpeg" alt="Firmware Development">
                 </div>
                 <div class="slide-indicator" id="indicator">
                     <ul>
                         <li onclick="set[0]()"><a href="#"></a></li>
                         <li onclick="set[1]()"><a href="#"></a></li>
                         <li onclick="set[2]()"><a href="#"></a></li>
+                        <li onclick="set[3]()"><a href="#"></a></li>
+                        <li onclick="set[4]()"><a href="#"></a></li>
+                        <li onclick="set[5]()"><a href="#"></a></li>
                     </ul>
+                </div>
+                <div class="slide-caption" id="slide-caption">
+                    <p class="caption">Embedded Systems</p>
+                    <p class="caption">Modeling & Simulations</p>
+                    <p class="caption">Circuit Design</p>
+                    <p class="caption">RTL Design</p>
+                    <p class="caption">Layout Design</p>
+                    <p class="caption">Firmware Development</p>
                 </div>
                 <a class="slide-cycle slide-next" onclick="slideNext()">&#10095;</a>
                 <a class="slide-cycle slide-prev" onclick="slidePrev()">&#10094;</a>
@@ -180,15 +213,7 @@
             <ul>
                 <li class=" active">
                     <span class="fa-solid fa-font-awesome titlefa"></span><br>
-                    <span class="text">Services</span>
-                </li>
-                <li>
-                    <span class="fa-solid fa-box-open titlefa"></span><br>
-                    <span class="text">Products</span>
-                </li>
-                <li>
-                    <span class="fa-solid fa-users titlefa"></span><br>
-                    <span class="text">Community</span>
+                    <span class="text">Our Services</span>
                 </li>
             </ul>
             
@@ -263,76 +288,79 @@
                     </div>
                 </li>
             </ul>
-            <div class="clients">
-                10 years of research experience with semiconductor fabs
-                <div class="row">
-                    <div class="container">
-                        <section class="logo-carousel slider" data-arrows="true">
-                            <div class="slide"><img src="images/carousel/sandia.png" alt="Sandia National Laboratories"></div>
-                            <div class="slide"><img src="images/carousel/intel.png" alt="Intel"></div>
-                            <div class="slide"><img src="images/carousel/applied.png" alt="Applied Materials"></div>
-                        </section>
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="clients">
+        <div class="title-separator">
+            <ul>
+                <li class=" active">
+                    <span class="fa-solid fa-handshake titlefa"></span><br>
+                    <span class="text">Our Clients</span>
+                </li>
+            </ul>
+        </div>
+        10 years of research experience with semiconductor fabs
+        <div class="row">
+            <div class="container">
+                <section class="logo-carousel slider" data-arrows="true">
+                    <div class="slide"><img src="images/carousel/sandia.png" alt="Sandia National Laboratories"></div>
+                    <div class="slide"><img src="images/carousel/intel.png" alt="Intel"></div>
+                    <div class="slide"><img src="images/carousel/applied.png" alt="Applied Materials"></div>
+                </section>
             </div>
         </div>
     </div>
+    <hr>
     <footer>
-        <div class="logo-container">
-            <img class="logo" src="images/logo/logo.jpg" alt="MetroScientific">
-            <div class="social-media"> 
-                <a href="https://www.facebook.com/metroscientific"><i class="fa-brands fa-facebook social"></i></a>
-                <a href="https://www.linkedin.com/company/metroscientific/about/"><i class="fa-brands fa-linkedin social"></i></a>
-                <a href="mailto:alam@metroscientific.com"><i class="fa-solid fa-envelope social"></i></a>
+        <div class="footer1">
+            <div class="logo-container">
+                <img class="logo" src="images/logo/logo.jpg" alt="MetroScientific">
+                <div class="copyright">
+                    <i class="fa-regular fa-copyright"></i> Balu Technology, Ltd.
+                </div>
             </div>
-            <div class="copyright">
-                <i class="fa-regular fa-copyright"></i> Balu Technology, Ltd.
+            <div class="contacts-container">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="contact">
+                                <h5>Contact us</h5>
+                                Mo Alam <br>
+                                CEO, Balu Technology <br>
+                                <a href="mailto:alam@balu.com">alam@balu.com</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="address">
+                                <h5>Visit us</h5>
+                                <button href="#">Maps & Directions</button>
+                            </div>    
+                        </td>
+                        <td>
+                            <div class="social-media"> 
+                                <h5>Follow us</h5>
+                                <a href="https://www.facebook.com/metroscientific"><i class="fa-brands fa-facebook social"></i></a>
+                                <a href="https://www.linkedin.com/company/metroscientific/about/"><i class="fa-brands fa-linkedin social"></i></a>
+                                <a href="mailto:alam@balu.com"><i class="fa-solid fa-envelope social"></i></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="job">
+                                <h5>Work with us</h5>
+                                <button href="#">view jobs</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                    </tr>
+                </table>
+                
             </div>
         </div>
-        <div class="contacts-container">
-            <div class="main-office">
-                <p>Main Office</p>
-                
-                <div class="contact">
-                    <p>Contact</p>
-                    Mo Alam <br>
-                    CEO, MetroScientific <br>
-                    <a href="mailto:alam@metroscientific.com">alam@metroscientific.com</a><br>
-                    +1(408)582-4997 <br>
-                </div>
-                <div class="address">
-                    <p>Adress</p>
-                    5001, Great America Parkway, <br>
-                    Santa Clara, <br> 
-                    CA 95054, <br>
-                    United States <br>
-                </div>
-                
-                 
-            </div>
-            <div class="branch-office">
-                <p>Branch Office</p>
-                <div class="dhaka">
-                    <p>Dhaka, Bangladesh</p>
-                    Amal Roy <br>
-                    General Manager, MetroScientific <br>
-                    <a href="mailto:amal@metroscientific.com"><email>amal@metroscientific.com</email></a> <br>
-                    +8801712-277079 <br>
-                    <address>House-57/11, East Raza Bazar, West Pantha Path <br>
-                        Dhaka, Bangladesh</address>
-                </div>
-                <div class="rajshahi">
-                    <p>Rajshahi Bangladesh</p>
-                    Maruf Chowdhury <br>
-                    Director, Rajshahi Branch, MetroScientific <br>
-                    <a href="mailto:maruf@metroscientific.com">maruf@metroscientific.com</a> <br>
-                    +8801715-013979 <br>
-                    House-511, Road-3, Padma Abashik, <br>
-                    Rajshahi, Bangladesh <br>
-                </div>
-            </div>
+        
             
-        </div>
+        
     </footer>
 </body>
 </html>
