@@ -85,7 +85,7 @@ nav{
     padding: 0;
     display: block;
     height: 100%;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     padding-top: 1.9vh;
     margin-bottom: -1.8vh;
 }
@@ -312,13 +312,14 @@ nav li a:hover:before{
     border-color: #0C224F66;
 }
 .slide-caption{
+    
     position: absolute;
     background-color: #00000088;
     left: 0;
     top: 0;
     margin: 0;
     height: 83vh;
-    width: 40vw;
+    width: 50vw;
     text-align: left;
     overflow: hidden;
 }
@@ -331,7 +332,7 @@ nav li a:hover:before{
         opacity: 0;
     }
     100% {
-        top: 0px;
+        top: 160px;
         opacity: 1;
     }
 }
@@ -342,6 +343,7 @@ nav li a:hover:before{
     padding-left: 200px;
     padding-right: 100px;
     width: 100%;
+    height: 100%;
     font-size: 3.6rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -350,7 +352,7 @@ nav li a:hover:before{
 .slide-caption .active {
     animation: caption-fly 0.5s ease-in-out;
     /* animation-delay: 1s; */
-    top: 0;
+    top: 160px;
 }
 
 /* our services */
@@ -362,7 +364,7 @@ nav li a:hover:before{
     padding-bottom: 48px;
     text-align: center;
     margin: auto;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     /* border-bottom: 10px solid #3C62AC; */
     transition: all 1s ease-in-out;
@@ -418,10 +420,10 @@ nav li a:hover:before{
     margin: 0 auto;
     text-align: center;
     list-style: none;
-    background-color: #05225C;
-    color: rgb(204, 204, 205);
+    background-color: #08399C;
+    color: #fff;
     transition: all 0.3s ease-in-out;
-    font-size: 1rem;
+    font-size: 1.2rem;
     overflow: hidden;
 }
 
@@ -460,7 +462,7 @@ nav li a:hover:before{
 }
 .infocard:hover .info-content h2 a {
     color: #fff;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 .infocard .img-container {
@@ -485,11 +487,16 @@ nav li a:hover:before{
     /* height: 140px; */
     padding: 10px;
 }
+/* 
+.infocard section h2 {
+    text-align: center;
+} */
 
 .info-content h2 a {
     text-decoration: none;
-    font-size: 1.5rem;
-    color: #E87B23;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
     transition: all 1s ease;
 }
 
@@ -498,13 +505,16 @@ nav li a:hover:before{
 /* Slider */
 .clients{
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 .slide{
-    height: 60px;
+    height: 200px;
     width: 100px;
 }
 .container{
-    width: 30%;
+    width: 70%;
+    padding-top: 32px;
 }
 .slick-slide {
     margin: 0px 20px;
@@ -595,14 +605,20 @@ nav li a:hover:before{
 
 hr {
     margin-top: 48px;
-    margin-bottom: 48px;
+    padding: 0;
+    margin-bottom: 0;
+    /* margin-bottom: 48px; */
 }
 /* Footer */
 footer {
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 32px;
+    padding-top: 0;
+    /* margin-bottom: 32px; */
     text-align: center;
+    color: #fff;
+    background-color: #08399C;
+    height: 25vh;
 }
 footer div {
     display: inline-block;
@@ -611,9 +627,11 @@ footer div {
     position: relative;
     margin-top: 32px;
     margin-bottom: 32px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* border: 1px solid black; */
     width: 78%;
+    color: #fff;
+    top: 40px;
     /* padding: 20px; */
 }
 .footer1 div {
@@ -636,13 +654,14 @@ footer div {
 .logo-container img{
     width: 100%;
     object-fit: contain;
+    display: none;
 }
 
 .contacts-container {
     float: right;
     margin: 0 auto;
     margin-right: 10%;
-    font-size: 0.8rem;
+    font-size: 1.05rem;
     padding-left: 20px;
     text-align: left;
 }
@@ -653,6 +672,7 @@ footer div {
 .contacts-container h5 {
     text-transform: uppercase;
     text-align: left;
+    font-weight: bold;
 }
 .contact a {
     color: inherit;
@@ -671,7 +691,7 @@ footer div {
     transition: all 0.2s ease-in-out;
 }
 .social-media a:hover {
-    color: #08399C;
+    color: #fff;
     opacity: 1;
 }
 
@@ -693,8 +713,9 @@ footer div {
     margin: 0 auto;
     padding: 5px;
     vertical-align: middle;
+    border: none;
 }
 .contacts-container button:hover {
-    background-color: #08399C;
+    background-color: #041e53;
     opacity: 1;
 }
