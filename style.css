@@ -37,6 +37,20 @@ html, body{
     font-weight: 400;
     position: relative;
     max-width: 100%;
+    font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+    html {font-size: 14px;}
+}
+@media (max-width: 992px){
+    html {font-size: 12px;}
+}
+@media (max-width: 768px) {
+    html {font-size: 10px;}
+}
+@media (max-width: 576px) {
+    html {font-size: 8px;}
 }
 body {
     overflow-x: hidden;
@@ -49,63 +63,115 @@ header {
     background-color: #fff;
     box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
     z-index: 100;
-    height: 11vh;
+    height: auto;
+    /* overflow: hidden; */
 }
 /* .okay {
     margin-top: 120px;
 } */
 
 header::after{
-    content: ' ';
+    content: '';
     display: table;
     clear: both;
-    height: 11vh;
 }
 .header-container{
     width: 80%;
+    position: relative;
     margin: 0 auto;
     padding: 0;
+    height: 11vh;
+}
+.header-container::before{
+    content: "";
     height: 100%;
+    display: inline-block;
+    vertical-align: middle;
 }
 .logo{
-    position: relative;
-    box-sizing: border-box;
-    left: 0;
+    display: inline-block;
     padding: 0;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
     object-fit: contain;
-    max-width: 400px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    display: inline block;
+    max-width: 20%;
+    max-height: 10vh;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    vertical-align: middle;
+}
+@media (max-width: 1600px){
+    .logo{
+        max-width: 30%;
+    }
+}
+@media (max-width: 1200px){
+    .logo{
+        max-width: 35%;
+    }
+}
+@media (max-width: 900px){
+    .logo{
+        max-width: 40%;
+    }
 }
 nav{
+    visibility: hidden;
+    position: absolute;
     float: right;
     padding: 0;
-    display: block;
-    height: 100%;
-    font-size: 1.5rem;
-    padding-top: 1.9vh;
-    margin-bottom: -1.8vh;
+    font-size: 1.2rem;
+    /* height: 100%; */
+    background-color: white;
+    /* margin-top: 11vh; */
+}
+nav .active {
+    visibility: visible;
 }
 
-nav ul{
-    position: relative;
+@media (max-width: 900px){
+    nav {
+        font-size: 0.75em;
+    }
+    nav li {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    .searchinp {
+        display: none;
+    }
+}
+nav > ul{
+    display: table;
+    box-sizing: border-box;
+    /* position: relative; */
     margin: 0 auto;
+    height: 11vh;
     padding: 0;
+    text-align: left;
+    vertical-align: middle;
     list-style: none;
 }
 
 nav li {
+    box-sizing: border-box;
     display: inline-block;
-    margin-left: 80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /* display: block; */
+    margin-left: 4.2vw;
+    /* padding-top: 0.9vw;
+    padding-bottom: 0.9vw; */
     position: relative;
-    vertical-align: top;
+    height: 11vh;
+    vertical-align: middle;
+    background-color: #fff;
 }
-
+nav li::before{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 0%;
+    vertical-align: middle;
+}
 nav li a {
     text-decoration: none;
     color: #08399C;
@@ -133,7 +199,7 @@ nav li a:before{
     bottom: 0;
 }
 
-nav li a:hover:before{
+nav li a:not(.searchform):hover:before{
     width: 100%;
 }
 
@@ -141,31 +207,39 @@ nav li a:hover:before{
 .dropdown-content{
     position: absolute;
     display: none;
-    min-width: 250px;
+    margin: 0 auto;
+    padding: 0;
+    width: max-content;
     padding-bottom: 5px;
     padding-right: 10px;
     background-color: #fff;
     z-index: 1;
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
     transition: all 250ms ease-in-out;
+    
 }
+
 .dropdown-content li {
-    margin-left: 20px;
-    padding-top: 15px;
-    padding-bottom: 5px;
-    display: block;
+    margin: 0;
+    margin-left: 1.5vh;
+    height: 3.5vh;
+    display: table;
+    /* padding-top: 20px; */
 }
 
 .dropdown:hover .dropdown-content{
     display: block;
 }
+.searchform{
+    vertical-align: middle;
+}
+
 .searchinp{
     margin: 0;
     padding-top: 6px;
     padding-left: 10px;
-    font-size: inherit;
+    /* font-size: 1.1vw; */
     font-family: overpass;
-    font-size: 17px;
     border: none;
     border-radius: 20px;
     color: #0C224F;
@@ -177,11 +251,30 @@ nav li a:hover:before{
 .searchform button {
     margin: 0;
     background: #fff;
-    font-size: 17px;
+    /* font-size: 1.2rem; */
     border: none;
     cursor: pointer;
     padding: 6px;
 }
+.menubar {
+    color: #08399C;
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    font-size: 3rem;
+}
+
+@media (min-width: 1600px) {
+    .menubar {
+        display: none;
+    }
+    nav {
+        position: relative;
+        visibility: visible;
+    }
+}
+
 
 /* Slide show */
 .slideshow-container {
@@ -193,6 +286,7 @@ nav li a:hover:before{
 }
 .slideshow {
     width: 100%;
+    height: 100%;
     /* background-color: #abc; */
     position: relative;
     margin: 0 auto;
@@ -203,7 +297,9 @@ nav li a:hover:before{
     /* border: 1px solid black; */
 }
 .slides {
-    background-color: #000;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: 0;
     /* position: absolute; */
     width: 100%;
@@ -211,29 +307,29 @@ nav li a:hover:before{
     overflow: hidden;
     transition: opacity 0.6s ease-in-out;
 }
-
-.slide-image {
-    position: relative;
-    width: 100%;
-    max-height: 89vh;
-    object-fit:cover;
-    display: block;
+#slide1 {
+    background-image: url(images/embedded-system.jpeg);
 }
-.slide-image::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    margin: 0 auto;
-    background-color: red;
+#slide2 {
+    background-image: url(images/modeling-simulation.jpg);
+}
+#slide3 {
+    background-image: url(images/circuit-design.jpg);
+}
+#slide4 {
+    background-image: url(images/rtl-design.jpg);
+}
+#slide5 {
+    background-image: url(images/layout-design.jpg);
+}
+#slide6 {
+    background-image: url(images/firmware-development.jpeg);
 }
 
-/* .slide-image:hover {
-    transform: scale(1.1);
-} */
+
 .slide-cycle {
     position: absolute;
+    transform: translateY(-50%);
     top: 50%;
     cursor: pointer;
     width: auto;
@@ -241,7 +337,6 @@ nav li a:hover:before{
     font-size: 2.5rem;
     transition: all ease-in-out 0.6s;
     user-select: none;
-    margin-top: -22px;
     padding: 16px;
 }
 .slide-cycle:hover{
@@ -265,20 +360,35 @@ nav li a:hover:before{
 }
 .slide-indicator ul {
     padding: 0;
-    padding-top: 20px;
+    height: 100%;
+    /* padding-top: 20px; */
     margin: 0 auto;
+    transition: visibility 1s ease-in-out;
 }
+@media (max-width: 900px){
+    .slide-indicator ul {
+        visibility: hidden;
+    }
+}
+.slide-indicator ul::before {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .slide-indicator li {
     cursor: pointer;
     display: inline-block;
     border: 1px solid #0C224F11;
     border-radius: 5px;
-    position: relative;
+    /* position: relative; */
     width: 100px;
     margin-left: 10px;
     margin-right: 10px;
     transition: all 0.5s ease-out;
     height: 5px;
+    vertical-align: middle;
 }
 .slide-indicator li a {
     background-color: #fff;
@@ -312,16 +422,13 @@ nav li a:hover:before{
     border-color: #0C224F66;
 }
 .slide-caption{
-    
-    position: absolute;
     background-color: #00000088;
-    left: 0;
-    top: 0;
     margin: 0;
     height: 83vh;
-    width: 50vw;
+    width: 1000px;
     text-align: left;
     overflow: hidden;
+    color: white;
 }
 @keyframes caption-fly {
     0% {
@@ -337,17 +444,24 @@ nav li a:hover:before{
     }
 }
 .slide-caption p {
-    position: absolute;
     box-sizing: border-box;
-    padding-top: 200px;
-    padding-left: 200px;
-    padding-right: 100px;
+    text-align: left;
+    /* display: block; */
+    word-wrap: break-word;
+    vertical-align: middle;
+    padding-left: 10vw;
     width: 100%;
     height: 100%;
     font-size: 3.6rem;
     font-weight: bold;
     text-transform: uppercase;
     top: 600px;
+}
+.slide-caption p::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 .slide-caption .active {
     animation: caption-fly 0.5s ease-in-out;
@@ -380,6 +494,7 @@ nav li a:hover:before{
 .title-separator ul {
     list-style: none;
     margin: 0;
+    padding-left: 0;
 }
 .title-separator ul li {
     position: relative;
@@ -413,10 +528,11 @@ nav li a:hover:before{
     background-color: #05225C;
 } */
 .info {
-    /* position: relative; */
+    position: relative;
     width: 100%;
     top: 0;
     padding-top: 24px;
+    padding-bottom: 24px;
     margin: 0 auto;
     text-align: center;
     list-style: none;
@@ -425,6 +541,7 @@ nav li a:hover:before{
     transition: all 0.3s ease-in-out;
     font-size: 1.2rem;
     overflow: hidden;
+    box-shadow: inset 0 0 900px #00000088;
 }
 
 .info ul {
@@ -434,6 +551,7 @@ nav li a:hover:before{
     text-align: center;
     padding-left: 40px;
     padding-right: 40px;
+    z-index: 10;
     /* left: -50%; */
 }
 
@@ -443,7 +561,7 @@ nav li a:hover:before{
     margin: 10px;
 }
 .infocard {
-    height: 500px;
+    height: 475px;
     width: 450px;
     box-sizing: border-box;
     margin-left: 16px;
@@ -451,14 +569,37 @@ nav li a:hover:before{
     padding: 10px;
     cursor: pointer;
     border-radius: 0px 0px 2px 2px;
+    transition: all 0.5s ease-in-out;
     /* border: 2px solid black; */
     /* background-color: #969411; */
+}
+@media (max-width: 1200px) {
+    
+    .infocard {
+        height: 450px;
+        width: 425px;
+    }
+}
+@media (max-width: 900px) {
+    .infocard {
+        height: 400px;
+        width: 400px;
+    }
+}
+@media (max-width: 768px) {
+    .info {
+        font-size: 0.75em;
+    }
+    .infocard {
+        height: 420px;
+        width: 350px;
+    }
 }
 
 .infocard:hover {
     color: #fff;
     background-color: #031334;
-    box-shadow: 0px 0px 10px 5px #0091A8;
+    box-shadow: 0px 0px 5px 2px #000;
 }
 .infocard:hover .info-content h2 a {
     color: #fff;
@@ -486,20 +627,31 @@ nav li a:hover:before{
     text-align: left;
     /* height: 140px; */
     padding: 10px;
+    text-align: justify;
 }
-/* 
+
 .infocard section h2 {
-    text-align: center;
-} */
+    text-align: left;
+}
 
 .info-content h2 a {
     text-decoration: none;
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;
+    text-align: left;
     transition: all 1s ease;
 }
 
+@media (max-width: 768px){
+    .info-content h2 a {
+        font-size: 1.5em;
+    }
+    .infocard:hover .info-content h2 a {
+        color: #fff;
+        font-size: 1.8em;
+    }
+}
 
 
 /* Slider */
@@ -511,6 +663,12 @@ nav li a:hover:before{
 .slide{
     height: 200px;
     width: 100px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.slide:hover {
+    background-color: #4f83eb33;
 }
 .container{
     width: 70%;
@@ -618,21 +776,26 @@ footer {
     text-align: center;
     color: #fff;
     background-color: #08399C;
-    height: 25vh;
+    min-height: 20vh;
 }
 footer div {
     display: inline-block;
 }
 .footer1 {
     position: relative;
-    margin-top: 32px;
+    margin-top: 48px;
     margin-bottom: 32px;
     /* box-sizing: border-box; */
     /* border: 1px solid black; */
     width: 78%;
     color: #fff;
-    top: 40px;
-    /* padding: 20px; */
+
+}
+.footer1::before{
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
 }
 .footer1 div {
     display: inline-block;
@@ -640,14 +803,14 @@ footer div {
 }
 .logo-container {
     margin: 0 auto;
-    width: 20%;
+    width: 30%;
     padding-right: 20px;
     padding-right: 48px;
     border-right: 2px solid #08399C;
-    position: absolute;
     left: 0%;
     transform: translateY(-50%);
     top: 50%;
+    vertical-align: middle;
     /* box-shadow: 0px 0px 2px 2px #000; */
     /* border: 1px solid black; */
 }
@@ -658,11 +821,9 @@ footer div {
 }
 
 .contacts-container {
-    float: right;
+    /* float: right; */
     margin: 0 auto;
-    margin-right: 10%;
     font-size: 1.05rem;
-    padding-left: 20px;
     text-align: left;
 }
 .contacts-container div {

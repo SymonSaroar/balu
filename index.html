@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balu Technology</title>
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet' as="font" type="font/woff2" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/54aa03985b.js" crossorigin="anonymous"></script>
@@ -20,92 +21,6 @@
         let sliderTimeout;
         let slides;
         let indicator;
-        let indicators;
-        showNextSlide();
-        function showNextSlide(){
-            slides = document.getElementsByClassName('slides');
-            indicator = document.getElementById('indicator');
-            caption = document.getElementById('slide-caption');
-            if(slides.length == 0 || indicator == null){
-                console.log("returned"); 
-                sliderTimeout = setTimeout(showNextSlide, 100);
-                return;
-            }
-            cur++;
-            cur %= numOfSlides;
-            let prev = ((cur - 1) + numOfSlides) % numOfSlides;
-            let pprev = ((cur - 2) + numOfSlides) % numOfSlides;
-            let now = cur;
-            indicators = indicator.getElementsByTagName('li');
-            captions = caption.getElementsByTagName('p');
-            if(indicators.length == 0 || captions.length == 0){
-                console.log("returned");
-                sliderTimeout = setTimeout(showNextSlide, 100);
-                return;
-            }
-            indicators[prev].className = indicators[prev].className.replace(" active", "");
-            indicators[now].className += " active";
-            captions[prev].className = captions[prev].className.replace(" active", "");
-            captions[now].className += " active";
-            // slides[prev].style.display = "none";
-            // slides[now].style.display = "block";
-            slides[now].style.height = "100%";
-            slides[now].style.opacity = "1";
-            slides[prev].style.height = "0";
-            slides[prev].style.opacity = "0.4";
-            // slides[now].style.animation = "slide-fade 1s ease-in";            
-            console.log("step", cur);
-            sliderTimeout = setTimeout(showNextSlide, slideDelay);
-        }
-        let set = [];
-        for(let i = 0; i < numOfSlides; i++){
-            set.push(
-                function() {
-                    cur = i-1;
-                    clearTimeout(sliderTimeout);
-                    for(let j = 0; j < numOfSlides; j++){
-                        slides[j].style.height = "0";
-                        slides[j].style.opacity = "0.4";
-                        captions[j].className = captions[j].className.replace(" active", "");
-                        indicators[j].className = indicators[j].className.replace(" active", "");
-                    }
-                    showNextSlide();
-                }
-            )
-        }
-        function slideNext(){
-        
-            cur %= numOfSlides;
-            clearTimeout(sliderTimeout);
-            for(let j = 0; j < numOfSlides; j++){
-                slides[j].style.height = "0";
-                slides[j].style.opacity = "0.4";
-                captions[j].className = captions[j].className.replace(" active", "");
-                indicators[j].className = indicators[j].className.replace(" active", "");
-            }
-            showNextSlide();
-        }
-        function slidePrev(){
-            cur -= 2;
-            cur += numOfSlides;
-            cur %= numOfSlides;
-            console.log("previous", cur);
-            clearTimeout(sliderTimeout);
-            for(let j = 0; j < numOfSlides; j++){
-                slides[j].style.height = "0";
-                slides[j].style.opacity = "0.4";
-                captions[j].className = captions[j].className.replace(" active", "");
-                indicators[j].className = indicators[j].className.replace(" active", "");
-            }
-            showNextSlide();
-        }
-        
-        $('.title-separator').ready(
-            function() {
-                $('.title-separator').css({'bottom' : '0px'})
-            }
-        )
-
         $(document).ready(function () {
             $('.logo-carousel').slick({
                 slidesToShow: 3,
@@ -127,7 +42,93 @@
                     }
                 }]
             });
+
+            $("#indicator li a:not(.anim)").remove();
+            $(".menubar").click(function(){
+                if($("nav").hasClass("visible"))
+                    $("nav").removeClass("visible");
+                else
+                    $("nav").addClass("visible");
+            });
+            showNextSlide();
         });
+        function showNextSlide(){
+            slides = document.getElementsByClassName('slides');
+            indicator = document.getElementById('indicator');
+            // caption = document.getElementById('slide-caption');
+            if(slides.length == 0 || indicator == null){
+                console.log("returned"); 
+                sliderTimeout = setTimeout(showNextSlide, 100);
+                return;
+            }
+            cur++;
+            cur %= numOfSlides;
+            let prev = ((cur - 1) + numOfSlides) % numOfSlides;
+            let pprev = ((cur - 2) + numOfSlides) % numOfSlides;
+            let now = cur;
+            indicators = indicator.getElementsByTagName('li');
+            // captions = caption.getElementsByTagName('p');
+            if(indicators.length == 0){
+                console.log("returned");
+                sliderTimeout = setTimeout(showNextSlide, 100);
+                return;
+            }
+            indicators[prev].className = indicators[prev].className.replace(" active", "");
+            indicators[now].className += " active";
+            // captions[prev].className = captions[prev].className.replace(" active", "");
+            // captions[now].className += " active";
+            // slides[prev].style.display = "none";
+            // slides[now].style.display = "block";
+            slides[now].style.height = "100%";
+            slides[now].style.opacity = "1";
+            slides[prev].style.height = "0";
+            slides[prev].style.opacity = "0.4";
+            // slides[now].style.animation = "slide-fade 1s ease-in";            
+            console.log("step", cur);
+            sliderTimeout = setTimeout(showNextSlide, slideDelay);
+        }
+        let set = [];
+        for(let i = 0; i < numOfSlides; i++){
+            set.push(
+                function() {
+                    cur = i-1;
+                    clearTimeout(sliderTimeout);
+                    for(let j = 0; j < numOfSlides; j++){
+                        slides[j].style.height = "0";
+                        slides[j].style.opacity = "0.4";
+                        // captions[j].className = captions[j].className.replace(" active", "");
+                        indicators[j].className = indicators[j].className.replace(" active", "");
+                    }
+                    showNextSlide();
+                }
+            )
+        }
+        function slideNext(){
+        
+            cur %= numOfSlides;
+            clearTimeout(sliderTimeout);
+            for(let j = 0; j < numOfSlides; j++){
+                slides[j].style.height = "0";
+                slides[j].style.opacity = "0.4";
+                // captions[j].className = captions[j].className.replace(" active", "");
+                indicators[j].className = indicators[j].className.replace(" active", "");
+            }
+            showNextSlide();
+        }
+        function slidePrev(){
+            cur -= 2;
+            cur += numOfSlides;
+            cur %= numOfSlides;
+            console.log("previous", cur);
+            clearTimeout(sliderTimeout);
+            for(let j = 0; j < numOfSlides; j++){
+                slides[j].style.height = "0";
+                slides[j].style.opacity = "0.4";
+                // captions[j].className = captions[j].className.replace(" active", "");
+                indicators[j].className = indicators[j].className.replace(" active", "");
+            }
+            showNextSlide();
+        }
     </script>
 </head>
 <body>
@@ -155,54 +156,67 @@
                     </li>
                     <li><a href="#">Contact Us</a></li>
                     <li>
-                        <form class="searchform" action="search-result.php">
+                        <a class="searchform">
                             <button type="submit"><span class="fa fa-search"></span></button>
                             <input class="searchinp" type="text" placeholder="Search..." name="search">
-                        </form>
+                        <a/>
                     </li>
                 </ul>
             </nav>
-        </div> 
+            <a href="javascript:void(0);" class="menubar" onclick="showNavbar()">
+                <i class="fa-solid fa-bars"></i>
+            </a>
+        </div>
     </header>
 
     <div class="okay">
         <div class="slideshow-container">
             <div class="slideshow">
-                <div class="slides">
-                    <img class="slide-image" src="images/embedded-system.jpeg" alt="Embedded Systems">
+                <div class="slides" id="slide1">
+                    <!-- <img class="slide-image" src="images/embedded-system.jpeg" alt="Embedded Systems"> -->
+                    <div class="slide-caption">
+                        <p class="caption">Embedded Systems</p>
+                    </div>
                 </div>
-                <div class="slides">
-                    <img class="slide-image" src="images/modeling-simulation.jpg" alt="Modeling and Simulations">
+                <div class="slides" id="slide2">
+                    <!-- <img class="slide-image" src="images/modeling-simulation.jpg" alt="Modeling and Simulations"> -->
+                    <div class="slide-caption">
+                        <p class="caption">Modeling & Simulation</p>
+                    </div>
                 </div>
-                <div class="slides">
-                    <img class="slide-image" src="images/circuit-design.jpg" alt="Circuit Design">
+                <div class="slides" id="slide3">
+                    <!-- <img class="slide-image" src="images/circuit-design.jpg" alt="Circuit Design"> -->
+                    <div class="slide-caption">
+                        <p class="caption">Circuit Design</p>
+                    </div>
                 </div>
-                <div class="slides">
-                    <img class="slide-image" src="images/rtl-design.jpg" alt="RTL Design">
+                <div class="slides" id="slide4">
+                    <!-- <img class="slide-image" src="images/rtl-design.jpg" alt="RTL Design"> -->
+                    <div class="slide-caption">
+                        <p class="caption">RTL Design</p>
+                    </div>
                 </div>
-                <div class="slides">
-                    <img class="slide-image" src="images/layout-design.jpg" alt="Layout Design">
+                <div class="slides" id="slide5">
+                    <!-- <img class="slide-image" src="images/layout-design.jpg" alt="Layout Design"> -->
+                    <div class="slide-caption">
+                        <p class="caption">Layout Design</p>
+                    </div>
                 </div>
-                <div class="slides">
-                    <img class="slide-image" src="images/firmware-development.jpeg" alt="Firmware Development">
+                <div class="slides" id="slide6">
+                    <!-- <img class="slide-image" src="images/firmware-development.jpeg" alt="Firmware Development"> -->
+                    <div class="slide-caption">
+                        <p class="caption">Firmware Development</p>
+                    </div>
                 </div>
                 <div class="slide-indicator" id="indicator">
                     <ul>
-                        <li onclick="set[0]()"><a href="#"></a></li>
-                        <li onclick="set[1]()"><a href="#"></a></li>
-                        <li onclick="set[2]()"><a href="#"></a></li>
-                        <li onclick="set[3]()"><a href="#"></a></li>
-                        <li onclick="set[4]()"><a href="#"></a></li>
-                        <li onclick="set[5]()"><a href="#"></a></li>
+                        <li onclick="set[0]()"><a class="anim" href="#"></a></li>
+                        <li onclick="set[1]()"><a class="anim" href="#"></a></li>
+                        <li onclick="set[2]()"><a class="anim" href="#"></a></li>
+                        <li onclick="set[3]()"><a class="anim" href="#"></a></li>
+                        <li onclick="set[4]()"><a class="anim" href="#"></a></li>
+                        <li onclick="set[5]()"><a class="anim" href="#"></a></li>
                     </ul>
-                </div>
-                <div class="slide-caption" id="slide-caption">
-                    <p class="caption">Embedded Systems</p>
-                    <p class="caption">Modeling & Simulations</p>
-                    <p class="caption">Circuit Design</p>
-                    <p class="caption">RTL Design</p>
-                    <p class="caption">Layout Design</p>
-                    <p class="caption">Firmware Development</p>
                 </div>
                 <a class="slide-cycle slide-next" onclick="slideNext()">&#10095;</a>
                 <a class="slide-cycle slide-prev" onclick="slidePrev()">&#10094;</a>
@@ -299,7 +313,7 @@
                 </li>
             </ul>
         </div>
-        10 years of research experience with semiconductor industry
+        <h4>10 years of research experience with semiconductor industry</h4>
         <div class="row">
             <div class="container">
                 <section class="logo-carousel slider" data-arrows="true">
