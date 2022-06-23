@@ -52,6 +52,9 @@ html, body{
 @media (max-width: 576px) {
     html {font-size: 8px;}
 }
+@media (max-width: 400px) {
+    html {font-size: 7px;}
+}
 body {
     overflow-x: hidden;
 }
@@ -115,6 +118,11 @@ header::after{
         max-width: 40%;
     }
 }
+@media (max-width: 500px){
+    .logo{
+        max-width: 45%;
+    }
+}
 nav{
     visibility: hidden;
     position: absolute;
@@ -152,6 +160,7 @@ nav > ul{
     vertical-align: middle;
     list-style: none;
 }
+
 
 nav li {
     box-sizing: border-box;
@@ -272,6 +281,22 @@ nav li a:not(.searchform):hover:before{
     nav {
         position: relative;
         visibility: visible;
+    }
+}
+@media (max-width: 900px) {
+    nav ul, nav li {
+        height: 8vh;
+    }
+}
+@media (max-width: 500px) {
+    nav ul, nav li {
+        height: 6vh;
+    }
+    nav li {
+        display: block;
+    }
+    nav {
+        right: 0;
     }
 }
 
@@ -595,6 +620,19 @@ nav li a:not(.searchform):hover:before{
         width: 350px;
     }
 }
+@media (max-width: 500px) {
+    .info {
+        font-size: 0.75em;
+    }
+    .info ul {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .infocard {
+        height: 420px;
+        width: 300px;
+    }
+}
 
 .infocard:hover {
     color: #fff;
@@ -652,7 +690,15 @@ nav li a:not(.searchform):hover:before{
         font-size: 1.8em;
     }
 }
-
+@media (max-width: 500px){
+    .info-content h2 a {
+        font-size: 1.2em;
+    }
+    .infocard:hover .info-content h2 a {
+        color: #fff;
+        font-size: 1.5em;
+    }
+}
 
 /* Slider */
 .clients{
@@ -752,8 +798,12 @@ nav li a:not(.searchform):hover:before{
 
 @media (max-width: 768px) {
     .slick-arrow {
-        width: 1rem;
-        height: 1rem;
+        width: 3em;
+        height: 3em;
+    }
+    .slide {
+        height: 50px;
+        width: 200px;
     }
 }
 
@@ -789,7 +839,15 @@ footer div {
     /* border: 1px solid black; */
     width: 78%;
     color: #fff;
-
+}
+@media (max-width: 768px) {
+    footer {
+        min-height: 15vh;
+    }
+    .footer1{
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
 }
 .footer1::before{
     content: "";
@@ -810,9 +868,15 @@ footer div {
     left: 0%;
     transform: translateY(-50%);
     top: 50%;
+    font-size: 1rem;
     vertical-align: middle;
     /* box-shadow: 0px 0px 2px 2px #000; */
     /* border: 1px solid black; */
+}
+@media (max-width: 1600px){
+    .logo-container{
+        width: 100%;
+    }
 }
 .logo-container img{
     width: 100%;
@@ -822,9 +886,11 @@ footer div {
 
 .contacts-container {
     /* float: right; */
+    width: 100%;
     margin: 0 auto;
     font-size: 1.05rem;
     text-align: left;
+    overflow-x: auto;
 }
 .contacts-container div {
     display: inline-block;
