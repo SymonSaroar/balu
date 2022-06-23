@@ -36,7 +36,7 @@ html, body{
     margin: 0;
     font-weight: 400;
     position: relative;
-    max-width: 100%;
+    width: 100%;
     font-size: 16px;
 }
 
@@ -229,8 +229,7 @@ nav li a:not(.searchform):hover:before{
 }
 
 .dropdown-content li {
-    margin: 0;
-    margin-left: 1.5vh;
+    margin: 0 auto;
     height: 3.5vh;
     display: table;
     /* padding-top: 20px; */
@@ -379,7 +378,7 @@ nav li a:not(.searchform):hover:before{
     height: 6vh;
     bottom: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     margin: 0;
     background-color: #00000088;
 }
@@ -390,11 +389,7 @@ nav li a:not(.searchform):hover:before{
     margin: 0 auto;
     transition: visibility 1s ease-in-out;
 }
-@media (max-width: 900px){
-    .slide-indicator ul {
-        visibility: hidden;
-    }
-}
+
 .slide-indicator ul::before {
     content: "";
     height: 100%;
@@ -446,6 +441,11 @@ nav li a:not(.searchform):hover:before{
 .slide-indicator .active {
     border-color: #0C224F66;
 }
+@media (max-width: 900px){
+    .slide-indicator ul {
+        display: none;
+    }
+}
 .slide-caption{
     background-color: #00000088;
     margin: 0;
@@ -454,6 +454,11 @@ nav li a:not(.searchform):hover:before{
     text-align: left;
     overflow: hidden;
     color: white;
+}
+@media (max-width: 1000px) {
+    .slide-caption {
+        width: 100%;
+    }
 }
 @keyframes caption-fly {
     0% {
@@ -469,12 +474,11 @@ nav li a:not(.searchform):hover:before{
     }
 }
 .slide-caption p {
-    box-sizing: border-box;
     text-align: left;
     /* display: block; */
     word-wrap: break-word;
     vertical-align: middle;
-    padding-left: 10vw;
+    padding-left: 10%;
     width: 100%;
     height: 100%;
     font-size: 3.6rem;
@@ -498,7 +502,7 @@ nav li a:not(.searchform):hover:before{
 .title-separator {
     /* box-sizing: border-box; */
     color: #08399C;
-    padding: 32px;
+    padding: 0;
     padding-top: 48px;
     padding-bottom: 48px;
     text-align: center;
@@ -524,7 +528,7 @@ nav li a:not(.searchform):hover:before{
 .title-separator ul li {
     position: relative;
     display: inline-block;
-    width: 300px;
+    /* width: 300px; */
     padding-left: 20px;
     padding-right: 20px;
     cursor: pointer;
@@ -574,8 +578,7 @@ nav li a:not(.searchform):hover:before{
     position: relative;
     margin: 0 auto;
     text-align: center;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 0;
     z-index: 10;
     /* left: -50%; */
 }
@@ -583,7 +586,9 @@ nav li a:not(.searchform):hover:before{
 .info ul li {
     display: inline-block;
     vertical-align: top;
-    margin: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .infocard {
     height: 475px;
@@ -624,10 +629,7 @@ nav li a:not(.searchform):hover:before{
     .info {
         font-size: 0.75em;
     }
-    .info ul {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+    
     .infocard {
         height: 420px;
         width: 300px;
@@ -718,6 +720,7 @@ nav li a:not(.searchform):hover:before{
 }
 .container{
     width: 70%;
+    padding: 0px;
     padding-top: 32px;
 }
 .slick-slide {
@@ -775,7 +778,7 @@ nav li a:not(.searchform):hover:before{
     color: #fff;
     filter: invert(77%) sepia(32%) saturate(1%) hue-rotate(344deg) brightness(105%) contrast(103%);
     border: none;
-    width: 2rem;
+    width: 3rem;
     height: 1.5rem;
     text-indent: -10000px;
     margin-top: -16px;
@@ -798,17 +801,17 @@ nav li a:not(.searchform):hover:before{
 
 @media (max-width: 768px) {
     .slick-arrow {
-        width: 3em;
+        width: 10%;
         height: 3em;
     }
     .slide {
         height: 50px;
-        width: 200px;
+        width: 15%;
     }
 }
 
 .row {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 hr {
@@ -826,6 +829,7 @@ footer {
     text-align: center;
     color: #fff;
     background-color: #08399C;
+    overflow-x: hidden;
     min-height: 20vh;
 }
 footer div {
@@ -840,31 +844,47 @@ footer div {
     width: 78%;
     color: #fff;
 }
+@media (max-width: 1200px) {
+    .footer1 {
+        margin-top: 32px;
+    }
+}
+@media (max-width: 900px) {
+    .footer1 {
+        margin-top: 16px;
+    }
+}
 @media (max-width: 768px) {
     footer {
         min-height: 15vh;
     }
     .footer1{
-        margin-top: 24px;
+        margin-top: 16px;
         margin-bottom: 16px;
+    }
+}
+@media (max-width: 500px) {
+    footer {
+        min-height: 10vh;
+    }
+    .footer1{
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 }
 .footer1::before{
     content: "";
     height: 100%;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .footer1 div {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .logo-container {
     margin: 0 auto;
     width: 30%;
-    padding-right: 20px;
-    padding-right: 48px;
-    border-right: 2px solid #08399C;
     left: 0%;
     transform: translateY(-50%);
     top: 50%;
@@ -896,6 +916,13 @@ footer div {
     display: inline-block;
     vertical-align: top;
 }
+.contacts-container table {
+    width: 100%;
+    overflow-x: auto;
+}
+.contacts-container tr {
+    width: 100%;
+}
 .contacts-container h5 {
     text-transform: uppercase;
     text-align: left;
@@ -924,14 +951,46 @@ footer div {
 
 .contacts-container td {
     vertical-align: top;
-    padding-right: 50px;
+    margin: 0 auto;
     padding-left: 50px;
+    padding-right: 50px;
     border-right: 1px solid black;
 }
+
 .contacts-container td:last-child {
-    border: none;
+    border-right: none;
 }
 
+@media (max-width: 1200px){
+    .contacts-container td {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+@media (max-width: 1000px){
+    .contacts-container td {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+@media (max-width: 858px){
+    .contacts-container td {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media (max-width: 802px){
+    .contacts-container td {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+@media (max-width: 612px){
+    .contacts-container td {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
 .contacts-container button {
     background-color: #000000;
     opacity: 0.7;
