@@ -31,13 +31,16 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
       "Liberation Mono", "Courier New", monospace;
 }
-
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 html, body{
     margin: 0;
     font-weight: 400;
     position: relative;
     width: 100%;
     font-size: 16px;
+    overflow-x: hidden;
 }
 
 @media (max-width: 1200px) {
@@ -174,7 +177,7 @@ nav li {
     vertical-align: middle;
     background-color: #fff;
 }
-nav li::before{
+nav > ul > li::before{
     content: "";
     display: inline-block;
     height: 100%;
@@ -205,7 +208,7 @@ nav li a:before{
 
 .dropdown-content li a:before{
     top: auto;
-    bottom: 0;
+    bottom: -0.5rem;
 }
 
 nav li a:not(.searchform):hover:before{
@@ -215,28 +218,52 @@ nav li a:not(.searchform):hover:before{
 
 .dropdown-content{
     position: absolute;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    clip-path: inset(0 0 100% 0);
     margin: 0 auto;
-    padding: 0;
+    padding: 1rem;
     width: max-content;
-    padding-bottom: 5px;
-    padding-right: 10px;
     background-color: #fff;
     z-index: 1;
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
-    transition: all 250ms ease-in-out;
-    
+    transition: all 500ms cubic-bezier(1,-0.32, 0.19, 1.46);   
+}
+@media (max-width: 900px){
+    .dropdown-content {
+        height: auto;
+        right: 0;
+        border: 1px solid rgb(46, 46, 46);
+    }
 }
 
 .dropdown-content li {
     margin: 0 auto;
-    height: 3.5vh;
-    display: table;
+    height: auto;
+    display: flex;
+    flex: 1 1 auto;
+    align-content: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    /* border: 1px solid black; */
     /* padding-top: 20px; */
 }
 
-.dropdown:hover .dropdown-content{
+.dropdown-content li a::after {
+    content: '';
+    width: 100%;
+    height: 1px;
     display: block;
+    position: absolute;
+    background-color: #656363;
+    border-radius: 5px;
+    bottom: -0.5rem;
+    box-shadow: 2px 0px 2px 0px gray;
+}
+
+.dropdown:hover .dropdown-content{
+    clip-path: inset(0 0 0 0);
 }
 .searchform{
     vertical-align: middle;
@@ -332,22 +359,22 @@ nav li a:not(.searchform):hover:before{
     transition: opacity 0.6s ease-in-out;
 }
 #slide1 {
-    background-image: url(images/embedded-system.jpeg);
+    background-image: url(/images/embedded-system.jpeg);
 }
 #slide2 {
-    background-image: url(images/modeling-simulation.jpg);
+    background-image: url(/images/modeling-simulation.jpg);
 }
 #slide3 {
-    background-image: url(images/circuit-design.jpg);
+    background-image: url(/images/circuit-design.jpg);
 }
 #slide4 {
-    background-image: url(images/rtl-design.jpg);
+    background-image: url(/images/rtl-design.jpg);
 }
 #slide5 {
-    background-image: url(images/layout-design.jpg);
+    background-image: url(/images/layout-design.jpg);
 }
 #slide6 {
-    background-image: url(images/firmware-development.jpeg);
+    background-image: url(/images/firmware-development.jpeg);
 }
 
 
@@ -812,39 +839,36 @@ nav li a:not(.searchform):hover:before{
 
 .row {
     overflow-x: hidden;
+    margin-bottom: 48px;
 }
 
-hr {
-    margin-top: 48px;
-    padding: 0;
-    margin-bottom: 0;
-    /* margin-bottom: 48px; */
-}
+
 /* Footer */
 footer {
     width: 100%;
     margin: 0 auto;
-    padding-top: 0;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     /* margin-bottom: 32px; */
     text-align: center;
     color: #fff;
     background-color: #08399C;
     overflow-x: hidden;
-    min-height: 20vh;
-}
-footer div {
-    display: inline-block;
+    /* min-height: 20vh; */
 }
 .footer1 {
     position: relative;
-    margin-top: 48px;
-    margin-bottom: 32px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    gap: 2rem;
     /* box-sizing: border-box; */
     /* border: 1px solid black; */
-    width: 78%;
+    width: 100%;
     color: #fff;
 }
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .footer1 {
         margin-top: 32px;
     }
@@ -871,25 +895,19 @@ footer div {
         margin-top: 8px;
         margin-bottom: 8px;
     }
-}
-.footer1::before{
+} */
+/* .footer1::before{
     content: "";
     height: 100%;
     display: inline-block;
     vertical-align: top;
-}
-.footer1 div {
-    display: inline-block;
-    vertical-align: top;
-}
+} */
+
 .logo-container {
     margin: 0 auto;
-    width: 30%;
+    width: 70%;
     left: 0%;
-    transform: translateY(-50%);
-    top: 50%;
     font-size: 1rem;
-    vertical-align: middle;
     /* box-shadow: 0px 0px 2px 2px #000; */
     /* border: 1px solid black; */
 }
@@ -906,22 +924,27 @@ footer div {
 
 .contacts-container {
     /* float: right; */
-    width: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: flex-start;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    /* width: 100%; */
     margin: 0 auto;
     font-size: 1.05rem;
     text-align: left;
     overflow-x: auto;
 }
-.contacts-container div {
-    display: inline-block;
-    vertical-align: top;
+
+.contacts-container > div {
+    padding: 1rem;
 }
-.contacts-container table {
-    width: 100%;
-    overflow-x: auto;
-}
-.contacts-container tr {
-    width: 100%;
+
+@media (min-width: 675px){
+    .contacts-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(1rem, 5rem, 8rem);
+    }
 }
 .contacts-container h5 {
     text-transform: uppercase;
@@ -935,7 +958,6 @@ footer div {
 
 .social-media {
     font-size: 2rem;
-    
 }
 .social-media a {
     color: inherit;
@@ -947,50 +969,9 @@ footer div {
 .social-media a:hover {
     color: #fff;
     opacity: 1;
+    font-size: 2.05rem;
 }
 
-.contacts-container td {
-    vertical-align: top;
-    margin: 0 auto;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-right: 1px solid black;
-}
-
-.contacts-container td:last-child {
-    border-right: none;
-}
-
-@media (max-width: 1200px){
-    .contacts-container td {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-}
-@media (max-width: 1000px){
-    .contacts-container td {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-}
-@media (max-width: 858px){
-    .contacts-container td {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-@media (max-width: 802px){
-    .contacts-container td {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-@media (max-width: 612px){
-    .contacts-container td {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-}
 .contacts-container button {
     background-color: #000000;
     opacity: 0.7;
